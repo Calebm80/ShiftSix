@@ -95,16 +95,20 @@ void bubbleSort(ArrayList<Double> arr, ArrayList<String> note){
     //simply give someone the organized lsits
 
 
-//show bottom expense
-    //can use top function then give index in opposite order
-
 // expected monthly expenditure
     //do on the first of every month
 
 //change budget
+void changeBudget (int i){
+
+    budget = i;
+
+}
 
 //check budget
-
+void checkBudget{
+    
+}
 //
 
 
