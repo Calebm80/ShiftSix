@@ -1,19 +1,39 @@
 package app;
 
-import java.util.*;
-
 public class MainMenu extends Menu {
-    private List<Button> buttons;
-
     MainMenu() {
+        initMenu();
         displayMenu();
+        handleInput();
     }
 
-    public void displayMenu() {
+    private void initMenu() {
+        addButton(new TestButton());
+        initScanner();
+    }
+
+    protected void displayMenu() {
         System.out.println("Main Menu");
+        System.out.println("Button choices, type button id to simulate click:");
+
+        for (Button button : buttons) {
+            System.out.println(button.getID());
+        }
     }
 
-    public List<Button> getButtons() {
-        return this.buttons;
+    private void handleInput() {
+        while (true) {
+            System.out.print("Input button choice: ");
+            String choice = scanner.nextLine();
+
+            for (Button button : buttons) {
+                String id = button.getID();
+                if (id.equals(choice)) {
+                    button.onClick();
+                } else {
+                    System.out.println("button does not exist");
+                }
+            }
+        }
     }
 }
