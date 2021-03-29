@@ -1,11 +1,19 @@
 package app;
 
 public class App {
+    private Menu currentMenu;
+    private MenuChangeListener mListener;
+
     public static void main(String[] args) {
-        new App();
+        App app = new App();
     }
     
     App() {
-        MainMenu mainMenu = new MainMenu();
+        this.mListener = new MenuChangeListener(){
+            public void onMenuChangeEvent(Menu menu) {
+                currentMenu = menu;
+            }
+        };
+        new MainMenu();
     }
 }

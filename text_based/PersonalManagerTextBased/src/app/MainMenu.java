@@ -6,7 +6,7 @@ public class MainMenu extends Menu {
     private List<Button> buttons;
 
     MainMenu() {
-        addButton(button);
+        displayMenu();
     }
 
     public void displayMenu() {
