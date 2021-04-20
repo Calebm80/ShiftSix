@@ -1,6 +1,6 @@
 package app;
 
-public class TestButton extends Button {
+public class TestButton extends Button { // temp button added for testing - remove later
     TestButton() {
         super("TestButton");
     }
