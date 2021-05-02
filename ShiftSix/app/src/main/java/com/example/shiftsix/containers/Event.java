@@ -27,4 +27,18 @@ public class Event {
     public GregorianCalendar getDate() {
         return date;
     }
+
+    public String getDateString() { // example return String: 4/20/2021
+        int year = date.get(Calendar.YEAR);
+        int month = date.get(Calendar.MONTH);
+        int day_of_month = date.get(Calendar.DAY_OF_MONTH);
+        return String.valueOf(month) + String.valueOf(day_of_month) + ", " + year;
+    }
+
+    public String getTimeString() {
+        int hour = date.get(Calendar.HOUR_OF_DAY);
+        int minute = date.get(Calendar.MINUTE);
+
+        String timeString = String.valueOf(hour) + ":" + String.valueOf(minute) + date.get(Calendar.AM_PM);
+    }
 }

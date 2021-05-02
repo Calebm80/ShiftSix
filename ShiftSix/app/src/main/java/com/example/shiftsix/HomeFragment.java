@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import com.example.shiftsix.containers.Event;
 import com.example.shiftsix.databinding.FragmentHomeBinding;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.GregorianCalendar;
@@ -29,6 +30,7 @@ public class HomeFragment extends Fragment {
     IFragmentChangeListener fragmentChangeListener;
     RecyclerView recyclerView;
     List<Event> eventList;
+    CardRecyclerViewAdapter adapter;
 
     //HashMap<CardView, CardView> cardList; // contains default card, expanded card - in that order
 
@@ -37,7 +39,7 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof IFragmentChangeListener) {
             fragmentChangeListener = (IFragmentChangeListener) context;
@@ -48,7 +50,7 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(getLayoutInflater());
@@ -71,7 +73,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void initRecyclerView() {
-        eventList = new SortedList<Event>();
+        eventList = new ArrayList<Event>();
 
         recyclerView = binding.recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
@@ -82,6 +84,8 @@ public class HomeFragment extends Fragment {
         eventList = new ArrayList<>();
 
         Collections.addAll(eventList, test);
+        adapter = new CardRecyclerViewAdapter(eventList);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override

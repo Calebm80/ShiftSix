@@ -1,10 +1,9 @@
 package com.example.shiftsix;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+//import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shiftsix.containers.Event;
 
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerViewAdapter.ViewHolder> {
@@ -33,7 +31,9 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
     public void onBindViewHolder(CardRecyclerViewAdapter.ViewHolder holder, int position) {
         Event event = this.data.get(position);
         String name = event.getName();
-        GregorianCalendar date = event.getDate();
+        String dateString = event.getDateString();
+        holder.cardName.setText(name);
+        holder.cardDate.setText(dateString);
     }
 
 
@@ -52,9 +52,10 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
             this.cardName = view.findViewById(R.id.card_name);
             this.cardDate = view.findViewById(R.id.card_date);
         }
+    }
 
-        @Override
+        /*@Override
         public void onClick(View view) {
             Toast.makeText(view.getContext(), "position : " + getLayoutPosition() + " text : " + this.textView.getText(), Toast.LENGTH_SHORT).show();
-        }
+        }*/
 }
