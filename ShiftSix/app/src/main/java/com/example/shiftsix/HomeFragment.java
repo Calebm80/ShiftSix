@@ -1,27 +1,36 @@
 package com.example.shiftsix;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SortedList;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
+import com.example.shiftsix.containers.Event;
 import com.example.shiftsix.databinding.FragmentHomeBinding;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
-    CardView calendarCard;
     FragmentHomeBinding binding;
     IFragmentChangeListener fragmentChangeListener;
+    RecyclerView recyclerView;
+    List<Event> eventList;
+
+    //HashMap<CardView, CardView> cardList; // contains default card, expanded card - in that order
 
     public HomeFragment() {
         // Required empty public constructor
@@ -43,21 +52,36 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(getLayoutInflater());
-        calendarCard = binding.calendarCard;
 
-        FloatingActionButton addItemButton = binding.addItemButton;
+        initRecyclerView();
+
+        /*FloatingActionButton addItemButton = binding.addItemButton;
 
         addItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fragmentChangeListener.changeFragment(new SettingsFragment());
             }
-        });
+        });*/
 
         /*CalendarView homeCalendar = findViewById(R.id.HomeCalendar);
         homeCalendar.setMinDate(homeCalendar.getDate());
         homeCalendar.setMaxDate(homeCalendar.getDate()+7);*/
         return binding.getRoot();
+    }
+
+    private void initRecyclerView() {
+        eventList = new SortedList<Event>();
+
+        recyclerView = binding.recyclerView;
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+
+
+        Event[] test = { new Event("name","test desc",new GregorianCalendar()), new Event("name1","test desc1",new GregorianCalendar()), new Event("name3","test desc3",new GregorianCalendar())};
+        eventList = new ArrayList<>();
+
+        Collections.addAll(eventList, test);
     }
 
     @Override
