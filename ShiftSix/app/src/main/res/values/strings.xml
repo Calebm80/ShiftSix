@@ -22,4 +22,11 @@
     <string name="description" />
     <string name="remind_me_about_this">Remind me about this?</string>
     <string name="card_time" />
+    <string name="add_an_event">Add an Event</string>
+    <string name="event_description">Event Description</string>
+    <string name="submit">Submit</string>
+    <string name="event_time">Event Time</string>
+    <string name="event_date">Event Date</string>
+    <string name="event_name">Event Name</string>
+    <string name="delete">delete</string>
 </resources>

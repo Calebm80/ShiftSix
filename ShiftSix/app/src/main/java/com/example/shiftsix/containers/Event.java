@@ -1,12 +1,10 @@
 package com.example.shiftsix.containers;
 
-import androidx.cardview.widget.CardView;
-
+import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Comparator;
 import java.util.GregorianCalendar;
 
-public class Event implements Comparable<Event> {
+public class Event implements Comparable<Event>, Serializable {
     private String name;
     private String description;
     private GregorianCalendar date;
@@ -21,7 +19,7 @@ public class Event implements Comparable<Event> {
         return name;
     }
 
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 
@@ -39,7 +37,6 @@ public class Event implements Comparable<Event> {
     public String getTimeString() {
         int hour = date.get(Calendar.HOUR);
         int minute = date.get(Calendar.MINUTE);
-        System.out.println(minute);
 
         String AM_PM = "PM";
         if (date.get(Calendar.AM_PM) == Calendar.AM) AM_PM = "AM";
