@@ -109,6 +109,23 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
+    public void addEvent(Event event) {
+        eventList.add(event);
+        Collections.sort(eventList);
+        updateRecyclerView();
+    }
+
+    public void removeEvent(Event event) {
+        eventList.remove(event);
+        Collections.sort(eventList);
+        updateRecyclerView();
+    }
+
+    public void updateRecyclerView() {
+        if (recyclerView.getAdapter() != null)
+            recyclerView.getAdapter().notifyDataSetChanged();
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

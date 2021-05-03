@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
 
         BottomNavigationView bottomNav = binding.bottomNav;
         View homeButton = binding.bottomNav.findViewById(R.id.nav_home);
-        View calendarButton = binding.bottomNav.findViewById(R.id.nav_calendar);
         View settingsButton = binding.bottomNav.findViewById(R.id.nav_settings);
 
         homeButton.setOnClickListener(new View.OnClickListener() {
