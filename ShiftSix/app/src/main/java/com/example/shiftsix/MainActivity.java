@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         setContentView(view);
         fragmentManager = getSupportFragmentManager();
         loadEventList();
+        //populateTestList();
 
         if (savedInstanceState == null) {
             fragmentManager.beginTransaction()
@@ -68,10 +69,12 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         BottomNavigationView bottomNav = binding.bottomNav;
         View homeButton = binding.bottomNav.findViewById(R.id.nav_home);
         View settingsButton = binding.bottomNav.findViewById(R.id.nav_settings);
+        View calendarButton = binding.bottomNav.findViewById(R.id.nav_calendar);
 
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bottomNav.setSelectedItemId(homeButton.getId());
                 changeFragment(new HomeFragment(eventList));
             }
         });
@@ -79,7 +82,16 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bottomNav.setSelectedItemId(settingsButton.getId());
                 changeFragment(new SettingsFragment());
+            }
+        });
+
+        calendarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomNav.setSelectedItemId(calendarButton.getId());
+                changeFragment(new CalendarFragment());
             }
         });
     }
@@ -139,6 +151,24 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
             fos.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void populateTestList() {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 1; j < 12; j++) {
+                for (int k = 1; k < 30; k++) {
+                    String name = "example event " + String.valueOf(i) + String.valueOf(j) + String.valueOf(k);
+                    GregorianCalendar calendar = new GregorianCalendar(i+2020,j+1,k);
+                    addEvent(new Event(name, "test description", calendar));
+                }
+            }
+        }
+    }
+
+    private void clearEventList() {
+        for (Event event : eventList) {
+            removeEvent(event);
         }
     }
 }
