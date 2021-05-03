@@ -3,9 +3,10 @@ package com.example.shiftsix.containers;
 import androidx.cardview.widget.CardView;
 
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
 
-public class Event {
+public class Event implements Comparable<Event> {
     private String name;
     private String description;
     private GregorianCalendar date;
@@ -30,7 +31,7 @@ public class Event {
 
     public String getDateString() { // example return String: 4/20/2021
         int year = date.get(Calendar.YEAR);
-        int month = date.get(Calendar.MONTH);
+        int month = date.get(Calendar.MONTH)+1; // month is stored from 0-11 so adjust +1 for final display
         int day_of_month = date.get(Calendar.DAY_OF_MONTH);
         return String.valueOf(month) + '/' + String.valueOf(day_of_month) + '/' + year;
     }
@@ -40,5 +41,29 @@ public class Event {
         int minute = date.get(Calendar.MINUTE);
 
         return String.valueOf(hour) + ":" + String.valueOf(minute) + date.get(Calendar.AM_PM);
+    }
+
+    @Override
+    public int compareTo(Event event) {
+        GregorianCalendar x = this.date;
+        int year_x = x.get(Calendar.YEAR);
+        int month_x = x.get(Calendar.MONTH);
+        int day_of_month_x = x.get(Calendar.DAY_OF_MONTH);
+        int hour_x = x.get(Calendar.HOUR_OF_DAY);
+        int minute_x = x.get(Calendar.MINUTE);
+
+        GregorianCalendar y = event.getDate();
+        int year_y = y.get(Calendar.YEAR);
+        int month_y = y.get(Calendar.MONTH);
+        int day_of_month_y = y.get(Calendar.DAY_OF_MONTH);
+        int hour_y = y.get(Calendar.HOUR_OF_DAY);
+        int minute_y = y.get(Calendar.MINUTE);
+
+        if (year_x != year_y) return Integer.compare(year_x, year_y);
+        if (month_x != month_y) return Integer.compare(month_x, month_y);
+        if (day_of_month_x != day_of_month_y) return Integer.compare(day_of_month_x, day_of_month_y);
+        if (hour_x != hour_y) return Integer.compare(hour_x, hour_y);
+        if (minute_x != minute_y) return Integer.compare(minute_x, minute_y);
+        return 0;
     }
 }

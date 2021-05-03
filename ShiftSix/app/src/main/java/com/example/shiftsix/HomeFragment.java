@@ -22,6 +22,7 @@ import com.example.shiftsix.databinding.FragmentHomeBinding;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -31,8 +32,6 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     List<Event> eventList;
     CardRecyclerViewAdapter adapter;
-
-    //HashMap<CardView, CardView> cardList; // contains default card, expanded card - in that order
 
     public HomeFragment() {
         // Required empty public constructor
@@ -45,7 +44,7 @@ public class HomeFragment extends Fragment {
             fragmentChangeListener = (IFragmentChangeListener) context;
         } else {
             throw new ClassCastException(context.toString()
-            + " must implement IFragmentChangeListener");
+                    + " must implement IFragmentChangeListener");
         }
     }
 
@@ -80,11 +79,32 @@ public class HomeFragment extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
 
-        Event[] test = { new Event("name","test desc",new GregorianCalendar()), new Event("name1","test desc1",new GregorianCalendar()), new Event("name3","test desc3",new GregorianCalendar())};
-        eventList = new ArrayList<>();
+        Event[] test = {
+                new Event("name", "test desc", new GregorianCalendar(2021, 2, 2)),
+                new Event("name1", "test desc1", new GregorianCalendar(2021, 3, 3)),
+                new Event("name2", "test desc2", new GregorianCalendar(2021, 3, 4)),
+                new Event("name1", "test desc1", new GregorianCalendar(2021, 3, 2)),
+                new Event("name1", "test desc1", new GregorianCalendar(2022, 3, 2)),
+                new Event("name1", "test desc1", new GregorianCalendar(2020, 4, 2)),
+                new Event("name1", "test desc1", new GregorianCalendar(2020, 12, 2)),
+                new Event("name1", "test desc1", new GregorianCalendar()),
+                new Event("name1", "test desc1", new GregorianCalendar()),
+                new Event("name1", "test desc1", new GregorianCalendar()),
+                new Event("name1", "test desc1", new GregorianCalendar()),
+                new Event("name1", "test desc1", new GregorianCalendar()),
+                new Event("name1", "test desc1", new GregorianCalendar()),
+                new Event("name3", "test desc3", new GregorianCalendar())
+        };
 
         Collections.addAll(eventList, test);
-        adapter = new CardRecyclerViewAdapter(eventList);
+        Collections.sort(eventList);
+
+        adapter = new CardRecyclerViewAdapter(eventList, new CardRecyclerViewAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(Event event) {
+                System.out.println("CLICKYCLICKY " + event.getDateString());
+            }
+        });
         recyclerView.setAdapter(adapter);
     }
 
