@@ -31,7 +31,7 @@ public class Event implements Comparable<Event> {
 
     public String getDateString() { // example return String: 4/20/2021
         int year = date.get(Calendar.YEAR);
-        int month = date.get(Calendar.MONTH)+1; // month is stored from 0-11 so adjust +1 for final display
+        int month = date.get(Calendar.MONTH) + 1; // month is stored from 0-11 so adjust +1 for final display
         int day_of_month = date.get(Calendar.DAY_OF_MONTH);
         return String.valueOf(month) + '/' + String.valueOf(day_of_month) + '/' + year;
     }
@@ -73,7 +73,8 @@ public class Event implements Comparable<Event> {
 
         if (year_x != year_y) return Integer.compare(year_x, year_y);
         if (month_x != month_y) return Integer.compare(month_x, month_y);
-        if (day_of_month_x != day_of_month_y) return Integer.compare(day_of_month_x, day_of_month_y);
+        if (day_of_month_x != day_of_month_y)
+            return Integer.compare(day_of_month_x, day_of_month_y);
         if (hour_x != hour_y) return Integer.compare(hour_x, hour_y);
         if (minute_x != minute_y) return Integer.compare(minute_x, minute_y);
         return 0;

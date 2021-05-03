@@ -20,7 +20,7 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
     private onItemClickListener onItemClickListener;
     private List<Event> data;
 
-    CardRecyclerViewAdapter (List<Event> data, onItemClickListener onItemClickListener) {
+    CardRecyclerViewAdapter(List<Event> data, onItemClickListener onItemClickListener) {
         this.data = data;
         this.onItemClickListener = onItemClickListener;
     }
