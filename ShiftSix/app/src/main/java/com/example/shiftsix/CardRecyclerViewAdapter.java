@@ -35,10 +35,10 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
     @Override
     public void onBindViewHolder(CardRecyclerViewAdapter.ViewHolder holder, int position) {
         Event event = this.data.get(position);
-        String name = event.getName();
-        String dateString = event.getDateString();
-        holder.cardName.setText(name);
-        holder.cardDate.setText(dateString);
+        holder.cardName.setText(event.getName());
+        holder.cardDate.setText(event.getDateString());
+        holder.cardTime.setText(event.getTimeString());
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,27 +59,13 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView cardName;
         private TextView cardDate;
+        private TextView cardTime;
 
         public ViewHolder(View view) {
             super(view);
             this.cardName = view.findViewById(R.id.card_name);
             this.cardDate = view.findViewById(R.id.card_date);
+            this.cardTime = view.findViewById(R.id.card_time);
         }
-
-        /*@Override
-        public void onClick(View view) {
-            System.out.println("CLICKED");
-            Bundle bundle = new Bundle();
-            bundle.putString("name", cardName.getText().toString());
-            bundle.putString("date", cardDate.getText().toString());
-            SelectedEventFragment selectedEventFragment = new SelectedEventFragment();
-            selectedEventFragment.setArguments(bundle);
-            AppCompatActivity activity = (AppCompatActivity) view.getContext();
-            activity.getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_content_frame, selectedEventFragment)
-                    .addToBackStack(null)
-                    .commit();
-        }*/
     }
 }

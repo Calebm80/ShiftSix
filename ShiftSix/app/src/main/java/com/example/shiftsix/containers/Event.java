@@ -37,10 +37,22 @@ public class Event implements Comparable<Event> {
     }
 
     public String getTimeString() {
-        int hour = date.get(Calendar.HOUR_OF_DAY);
+        int hour = date.get(Calendar.HOUR);
         int minute = date.get(Calendar.MINUTE);
+        System.out.println(minute);
 
-        return String.valueOf(hour) + ":" + String.valueOf(minute) + date.get(Calendar.AM_PM);
+        String AM_PM = "PM";
+        if (date.get(Calendar.AM_PM) == Calendar.AM) AM_PM = "AM";
+
+        String hour_fixed = String.valueOf(hour);
+        if (hour == 0) hour_fixed = "12";
+
+        String minute_fixed = String.valueOf(minute);
+        while (minute_fixed.length() < 2) {
+            minute_fixed = "0" + minute_fixed;
+        }
+
+        return hour_fixed + ":" + minute_fixed + ' ' + AM_PM;
     }
 
     @Override

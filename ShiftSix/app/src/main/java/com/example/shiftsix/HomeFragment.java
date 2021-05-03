@@ -88,7 +88,7 @@ public class HomeFragment extends Fragment {
                 new Event("name1", "test desc1", new GregorianCalendar(2022, 3, 2)),
                 new Event("name1", "test desc1", new GregorianCalendar(2020, 4, 2)),
                 new Event("name1", "test desc1", new GregorianCalendar(2020, 12, 2)),
-                new Event("name1", "test desc1", new GregorianCalendar()),
+                new Event("name1", "test desc1", new GregorianCalendar(2021, 5, 3, 15, 21)),
                 new Event("name1", "test desc1", new GregorianCalendar()),
                 new Event("name1", "test desc1", new GregorianCalendar()),
                 new Event("name1", "test desc1", new GregorianCalendar()),
