@@ -9,14 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.shiftsix.containers.Event;
 import com.example.shiftsix.databinding.FragmentHomeBinding;
 import com.example.shiftsix.databinding.FragmentSelectedEventBinding;
 
 public class SelectedEventFragment extends Fragment {
     FragmentSelectedEventBinding binding;
+    Event event;
 
-    public SelectedEventFragment() {
-        // Required empty public constructor
+    public SelectedEventFragment(Event event) {
+        this.event = event;
     }
 
     @Override

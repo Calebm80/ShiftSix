@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 
 import com.example.shiftsix.containers.Event;
 import com.example.shiftsix.databinding.FragmentHomeBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -56,14 +57,14 @@ public class HomeFragment extends Fragment {
 
         initRecyclerView();
 
-        /*FloatingActionButton addItemButton = binding.addItemButton;
+        FloatingActionButton addItemButton = binding.addItemButton;
 
         addItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fragmentChangeListener.changeFragment(new SettingsFragment());
             }
-        });*/
+        });
 
         /*CalendarView homeCalendar = findViewById(R.id.HomeCalendar);
         homeCalendar.setMinDate(homeCalendar.getDate());
@@ -102,7 +103,7 @@ public class HomeFragment extends Fragment {
         adapter = new CardRecyclerViewAdapter(eventList, new CardRecyclerViewAdapter.onItemClickListener() {
             @Override
             public void onItemClick(Event event) {
-                System.out.println("CLICKYCLICKY " + event.getDateString());
+                fragmentChangeListener.changeFragment(new SelectedEventFragment(event));
             }
         });
         recyclerView.setAdapter(adapter);
