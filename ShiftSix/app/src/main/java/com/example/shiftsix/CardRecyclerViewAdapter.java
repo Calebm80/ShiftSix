@@ -52,6 +52,11 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
             this.cardName = view.findViewById(R.id.card_name);
             this.cardDate = view.findViewById(R.id.card_date);
         }
+
+        @Override
+        public void onClick(View view) {
+            System.out.println("click");
+        }
     }
 
         /*@Override
