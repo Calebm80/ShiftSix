@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         setContentView(view);
         fragmentManager = getSupportFragmentManager();
         loadEventList();
-        //populateTestList();
+        //populateTestList(); - uncomment to re-populate eventList with test values
 
         if (savedInstanceState == null) {
             fragmentManager.beginTransaction()
@@ -157,9 +157,9 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
     private void populateTestList() {
         for (int i = 0; i < 5; i++) {
             for (int j = 1; j < 12; j++) {
-                for (int k = 1; k < 30; k++) {
+                for (int k = 1; k < 3; k++) {
                     String name = "example event " + String.valueOf(i) + String.valueOf(j) + String.valueOf(k);
-                    GregorianCalendar calendar = new GregorianCalendar(i+2020,j+1,k);
+                    GregorianCalendar calendar = new GregorianCalendar(i+2020,j+1,k*5);
                     addEvent(new Event(name, "test description", calendar));
                 }
             }
