@@ -82,6 +82,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/delete"
         android:backgroundTint="@android:color/holo_red_dark"
+        android:textColor="@android:color/black"
         />
 
 
