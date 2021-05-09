@@ -19,7 +19,11 @@ public class Menu {
         this.buttons.add(button);
     }
 
+<<<<<<< HEAD
     protected void handleInput() {
+=======
+    protected void handleInput() { // currently input handling has issues when finishing one action and beginning another - fix later
+>>>>>>> develop
         Scanner scanner = new Scanner(System.in);
 
         while (true) {

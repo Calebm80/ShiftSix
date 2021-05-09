@@ -3,11 +3,20 @@ package app;
 import java.util.Scanner;
 
 public class AddExpenseButton extends Button {
+<<<<<<< HEAD
     ExpenseList expenseList;
 
     AddExpenseButton(ExpenseList list) {
         super("AddExpenseButton");
         this.expenseList = list;
+=======
+    ExpenseList expenseList; // this expenselist would be serialized to a common file which it would load
+                             // from - containing it in button is a temp fix for testing
+
+    AddExpenseButton(ExpenseList list) {
+        super("AddExpenseButton");
+        this.expenseList = list; 
+>>>>>>> develop
     }
 
     public void onClick() {
