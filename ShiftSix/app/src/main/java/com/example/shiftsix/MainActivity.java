@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -123,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
                 @Override
                 public void onClick(View v) {
                     bottomNav.setSelectedItemId(expenseButton.getId());
+                    changeFragment(new ExpenseFragment());
                     initBottomNav();
                 }
             });
@@ -200,15 +202,25 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
     }
 
     private void populateTestList() {
-        for (int i = 0; i < 5; i++) {
-            for (int j = 1; j < 12; j++) {
+        for (int month = 0; month < 12; month++) {
+            for (int i = 0; i < 8; i++) {
+                int day = (int) (Math.random()*30) + 1;
+                String name = "example event " + String.valueOf(i) + String.valueOf(month);
+                GregorianCalendar calendar = new GregorianCalendar(2021, month, day);
+                eventList.add(new Event(name, "test description", calendar));
+            }
+        }
+        /*for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 12; j++) {
                 for (int k = 1; k < 30; k++) {
                     String name = "example event " + String.valueOf(i) + String.valueOf(j) + String.valueOf(k);
                     GregorianCalendar calendar = new GregorianCalendar(i + 2020, j, k);
-                    addEvent(new Event(name, "test description", calendar));
+                    eventList.add(new Event(name, "test description", calendar));
                 }
             }
-        }
+        }*/
+        updateRecyclerView();
+        saveEventList();
     }
 
     private void clearEventList() {
