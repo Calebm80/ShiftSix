@@ -1,5 +1,6 @@
 package com.example.shiftsix;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -17,9 +18,21 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 public class SettingsFragment extends Fragment {
     FragmentSettingsBinding binding;
     SharedPreferences sharedPreferences;
+    IPreferenceUpdateListener preferenceUpdateListener;
 
     public SettingsFragment(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof IPreferenceUpdateListener) {
+            preferenceUpdateListener = (IPreferenceUpdateListener) context;
+        } else {
+            throw new ClassCastException(context.toString()
+                    + " must implement IPreferenceUpdateListener");
+        }
     }
 
     @Override
@@ -51,12 +64,11 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    System.out.println(buttonView.getId() + " CHECKED");
                     updatePreference(key, true);
                 } else {
-                    System.out.println(buttonView.getId() + " UNCHECKED");
                     updatePreference(key, false);
                 }
+                preferenceUpdateListener.preferenceUpdate();
             }
         });
     }
