@@ -149,5 +149,9 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="860" y="455" key="AndroidCreateResourceFileDialog/0.0.2560.1400/-1920.0.1920.1040/2560.296.1366.728@0.0.2560.1400" timestamp="1620599120340" />
+    <state x="1124" y="490" key="AndroidCreateXmlResourceDialog" timestamp="1620599803621">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1124" y="490" key="AndroidCreateXmlResourceDialog/0.0.2560.1400/-1920.0.1920.1040/2560.296.1366.728@0.0.2560.1400" timestamp="1620599803621" />
   </component>
 </project>
