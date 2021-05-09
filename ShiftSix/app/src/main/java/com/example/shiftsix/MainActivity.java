@@ -58,7 +58,10 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         View view = binding.getRoot();
         setContentView(view);
         fragmentManager = getSupportFragmentManager();
+
         loadEventList();
+        initBottomNav();
+        loadPreferences();
         //populateTestList();
 
         if (savedInstanceState == null) {
@@ -67,7 +70,9 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
                     .add(R.id.fragment_content_frame, new HomeFragment(eventList), null)
                     .commit();
         }
+    }
 
+    private void initBottomNav() {
         BottomNavigationView bottomNav = binding.bottomNav;
         View homeButton = binding.bottomNav.findViewById(R.id.nav_home);
         View settingsButton = binding.bottomNav.findViewById(R.id.nav_settings);
@@ -85,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
             @Override
             public void onClick(View v) {
                 bottomNav.setSelectedItemId(settingsButton.getId());
-                changeFragment(new SettingsFragment());
+                changeFragment(new SettingsFragment(sharedPreferences));
             }
         });
 
@@ -155,10 +160,6 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private void savePreferences() {
-
     }
 
     private void loadPreferences() {
