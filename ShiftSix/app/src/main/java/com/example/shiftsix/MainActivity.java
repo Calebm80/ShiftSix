@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Toast;
 
@@ -27,7 +26,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements IFragmentChangeListener, IEventListUpdateListener {
+public class MainActivity extends AppCompatActivity implements IFragmentChangeListener, IEventListUpdateListener, IPreferenceUpdateListener {
     private FragmentManager fragmentManager;
     List<Event> eventList;
     ActivityMainBinding binding;
@@ -63,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         loadEventList();
         loadPreferences();
         initBottomNav();
+
+        //clearEventList();
         //populateTestList();
 
         if (savedInstanceState == null) {
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
                 @Override
                 public void onClick(View v) {
                     bottomNav.setSelectedItemId(calendarButton.getId());
-                    changeFragment(new CalendarFragment());
+                    changeFragment(new CalendarFragment(eventList));
                     initBottomNav();
                 }
             });
@@ -193,12 +194,17 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         this.sharedPreferences = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
     }
 
+    @Override
+    public void preferenceUpdate() {
+        initBottomNav();
+    }
+
     private void populateTestList() {
         for (int i = 0; i < 5; i++) {
             for (int j = 1; j < 12; j++) {
                 for (int k = 1; k < 30; k++) {
                     String name = "example event " + String.valueOf(i) + String.valueOf(j) + String.valueOf(k);
-                    GregorianCalendar calendar = new GregorianCalendar(i + 2020, j + 1, k);
+                    GregorianCalendar calendar = new GregorianCalendar(i + 2020, j, k);
                     addEvent(new Event(name, "test description", calendar));
                 }
             }
@@ -206,8 +212,8 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
     }
 
     private void clearEventList() {
-        for (Event event : eventList) {
-            removeEvent(event);
+        for (int i = 0; i <= eventList.size(); i++) {
+            removeEvent(eventList.get(i));
         }
     }
 }
