@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
     private FragmentManager fragmentManager;
     List<Event> eventList;
     ActivityMainBinding binding;
+    SharedPreferences sharedPreferences;
 
     @Override
     public void changeFragment(Fragment fragment) {
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        this.binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
         fragmentManager = getSupportFragmentManager();
@@ -140,10 +142,11 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
 
     private void saveEventList() {
         if (eventList.isEmpty()) return;
-        try {
-            Context context = MainActivity.this;
-            if (context == null) return;
 
+        Context context = MainActivity.this;
+        if (context == null) return;
+
+        try {
             FileOutputStream fos = context.openFileOutput("eventList", Context.MODE_PRIVATE);
             ObjectOutputStream os = new ObjectOutputStream(fos);
             os.writeObject(eventList);
@@ -152,6 +155,14 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void savePreferences() {
+
+    }
+
+    private void loadPreferences() {
+        this.sharedPreferences = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
     }
 
     private void populateTestList() {
