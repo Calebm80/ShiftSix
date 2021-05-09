@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- ids here are used as the key for saving preferences -->
-    <item name="setting_expense_menu_visibility" type="id"/>
-    <item name="setting_calendar_menu_visibility" type="id"/>
-</resources>

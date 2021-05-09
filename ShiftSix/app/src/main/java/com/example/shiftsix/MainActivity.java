@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Toast;
 
@@ -60,8 +61,8 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         fragmentManager = getSupportFragmentManager();
 
         loadEventList();
-        initBottomNav();
         loadPreferences();
+        initBottomNav();
         //populateTestList();
 
         if (savedInstanceState == null) {
@@ -74,33 +75,59 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
 
     private void initBottomNav() {
         BottomNavigationView bottomNav = binding.bottomNav;
-        View homeButton = binding.bottomNav.findViewById(R.id.nav_home);
-        View settingsButton = binding.bottomNav.findViewById(R.id.nav_settings);
-        View calendarButton = binding.bottomNav.findViewById(R.id.nav_calendar);
 
+        // init home button
+        View homeButton = binding.bottomNav.findViewById(R.id.nav_home);
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 bottomNav.setSelectedItemId(homeButton.getId());
                 changeFragment(new HomeFragment(eventList));
+                initBottomNav();
             }
         });
 
+        // init settings button
+        View settingsButton = binding.bottomNav.findViewById(R.id.nav_settings);
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 bottomNav.setSelectedItemId(settingsButton.getId());
                 changeFragment(new SettingsFragment(sharedPreferences));
+                initBottomNav();
             }
         });
 
-        calendarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bottomNav.setSelectedItemId(calendarButton.getId());
-                changeFragment(new CalendarFragment());
-            }
-        });
+        // init calendar button
+        View calendarButton = binding.bottomNav.findViewById(R.id.nav_calendar);
+        if (sharedPreferences.getBoolean("calendarMenuVisibility", true)) {
+            calendarButton.setVisibility(View.VISIBLE);
+            calendarButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bottomNav.setSelectedItemId(calendarButton.getId());
+                    changeFragment(new CalendarFragment());
+                    initBottomNav();
+                }
+            });
+        } else {
+            calendarButton.setVisibility(View.GONE);
+        }
+
+        // init expense button
+        View expenseButton = binding.bottomNav.findViewById(R.id.nav_expenses);
+        if (sharedPreferences.getBoolean("expenseMenuVisibility", true)) {
+            expenseButton.setVisibility(View.VISIBLE);
+            expenseButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bottomNav.setSelectedItemId(expenseButton.getId());
+                    initBottomNav();
+                }
+            });
+        } else {
+            expenseButton.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -171,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
             for (int j = 1; j < 12; j++) {
                 for (int k = 1; k < 30; k++) {
                     String name = "example event " + String.valueOf(i) + String.valueOf(j) + String.valueOf(k);
-                    GregorianCalendar calendar = new GregorianCalendar(i+2020,j+1,k);
+                    GregorianCalendar calendar = new GregorianCalendar(i + 2020, j + 1, k);
                     addEvent(new Event(name, "test description", calendar));
                 }
             }

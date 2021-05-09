@@ -19,6 +19,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="6dp">
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/expense_menu_visibility"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/expense_menu_visibility"/>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/calendar_menu_visibility"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/calendar_menu_visibility" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
