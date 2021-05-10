@@ -39,6 +39,8 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
         holder.cardName.setText(event.getName());
         holder.cardDate.setText(event.getDateString());
         holder.cardTime.setText(event.getTimeString());
+
+        // set color of individual row items depending on due date being passed/today/future day
         Event now = new Event();
         if (event.before(now)) {
             holder.cardView.setCardBackgroundColor(Color.parseColor("#ffcfcf")); // "#ffcfcf" red for overdue

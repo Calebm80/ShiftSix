@@ -17,6 +17,7 @@ public class Event implements Comparable<Event>, Serializable {
         this.date = date;
     }
 
+    /* initializes an event with null name and description, current date/time */
     public Event() {
         this.name = null;
         this.description = null;
@@ -35,13 +36,15 @@ public class Event implements Comparable<Event>, Serializable {
         return date;
     }
 
-    public String getDateString() { // example return String: 4/20/2021
+    /* returns time as string -> m/d/yyyy*/
+    public String getDateString() {
         int year = date.get(Calendar.YEAR);
         int month = date.get(Calendar.MONTH); // month is stored from 0-11 so adjust +1 for final display
         int day_of_month = date.get(Calendar.DAY_OF_MONTH);
         return String.valueOf(month+1) + '/' + String.valueOf(day_of_month) + '/' + year;
     }
 
+    /* returns time as string -> h:mm AM/PM */
     public String getTimeString() {
         int hour = date.get(Calendar.HOUR);
         int minute = date.get(Calendar.MINUTE);
@@ -85,25 +88,20 @@ public class Event implements Comparable<Event>, Serializable {
         return 0;
     }
 
-    // returns true if given event is before current event
+    /* returns true if given event is before this event */
     public Boolean before(Event event) {
         int result = this.compareTo(event);
         if (result < 0) return true;
         return false;
-        /*int year_given = event.date.get(Calendar.YEAR);
-        int month_given = event.date.get(Calendar.MONTH);
-        int day_given = event.date.get(Calendar.DATE);
-        int hour_given = event.date.get(Calendar.HOUR_OF_DAY);
-        int minute_given = event.date.get(Calendar.MINUTE);*/
-
     }
 
-    // returns true if given event is after current event
+    /* returns true if given event is after this event */
     public Boolean after(Event event) {
         int result = this.compareTo(event);
         return result > 0;
     }
 
+    /* returns true if given is on the same day as this event */
     public Boolean sameDay(Event event) {
         int year_given = event.getDate().get(Calendar.YEAR);
         int month_given = event.getDate().get(Calendar.MONTH);
