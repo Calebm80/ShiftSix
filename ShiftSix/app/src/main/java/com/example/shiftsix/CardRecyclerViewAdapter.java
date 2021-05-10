@@ -45,7 +45,7 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
         if (event.before(now)) {
             holder.cardView.setCardBackgroundColor(Color.parseColor("#ffcfcf")); // "#ffcfcf" red for overdue
         } else if (event.after(now) && event.sameDay(now)) {
-            holder.cardView.setCardBackgroundColor(Color.parseColor("#ffe1d1")); // "#ffe1d1" orange for due today
+            holder.cardView.setCardBackgroundColor(Color.WHITE); // "#ffe1d1" orange for due today
         } else {
             holder.cardView.setCardBackgroundColor(Color.WHITE);
         }

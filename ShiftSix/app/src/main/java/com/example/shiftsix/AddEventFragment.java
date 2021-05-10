@@ -17,11 +17,15 @@ import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import com.example.shiftsix.containers.Event;
 import com.example.shiftsix.databinding.FragmentAddEventBinding;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.checkbox.MaterialCheckBox;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import static androidx.core.content.ContextCompat.getSystemService;
@@ -34,6 +38,7 @@ public class AddEventFragment extends Fragment {
 
 
     public AddEventFragment() {
+        // required empty constructor
     }
 
     @Override
@@ -73,6 +78,10 @@ public class AddEventFragment extends Fragment {
         });
     }
 
+    private void initCheckbox() {
+        CheckBox checkBox = binding.checkboxEventReminder;
+    }
+
     /* creates a new event, adds it to the RecyclerView and the eventList,
     *  prompts RecyclerView to redraw */
     private void createEvent() {
@@ -84,7 +93,12 @@ public class AddEventFragment extends Fragment {
 
         Event event = new Event(eventName, eventDescription, date);
 
-        notificationScheduleListener.scheduleNotification(eventName + ": " + eventDescription, 5000); // 5 second delay
+        if (binding.checkboxEventReminder.isChecked()) {
+            long delay = getEventDelay(event);
+            if (delay > 0)
+                notificationScheduleListener.scheduleNotification(eventName + ": " + eventDescription, delay);
+        }
+
         eventListUpdateListener.addEvent(event);
     }
 
@@ -103,8 +117,18 @@ public class AddEventFragment extends Fragment {
         int hourOfDay = Integer.parseInt(eventTimeSplit[0]);
         int minute = Integer.parseInt(eventTimeSplitAM_PM[0]);
 
-        if (eventTimeSplitAM_PM[1].equals("PM")) hourOfDay += 12;
+        if (eventTimeSplitAM_PM[1].equals("PM")) {
+            hourOfDay += 12;
+        } else if (hourOfDay == 12) {
+            hourOfDay = 0;
+        }
 
+        GregorianCalendar calendar  = new GregorianCalendar(year, month, day, hourOfDay, minute);
         return new GregorianCalendar(year, month, day, hourOfDay, minute);
+    }
+
+    private long getEventDelay(Event event) {
+        Event now = new Event();
+        return event.getTimeDifference(now);
     }
 }

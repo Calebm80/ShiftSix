@@ -13,6 +13,7 @@ import com.applandeo.materialcalendarview.EventDay;
 import com.example.shiftsix.R;
 
 import java.io.Serializable;
+import java.time.Year;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -124,5 +125,10 @@ public class Event implements Comparable<Event>, Serializable {
         int day = this.getDate().get(Calendar.DATE);
 
         return (year == year_given) && (month == month_given) && (day == day_given);
+    }
+
+    /* returns time difference between this event and another event in milliseconds */
+    public long getTimeDifference(Event event) {
+        return this.getDate().getTimeInMillis() - event.getDate().getTimeInMillis();
     }
 }

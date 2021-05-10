@@ -5,7 +5,6 @@ import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -34,16 +33,14 @@ import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
 
 public class MainActivity extends AppCompatActivity implements IFragmentChangeListener, IEventListUpdateListener, IPreferenceUpdateListener, INotificationScheduleListener {
     private FragmentManager fragmentManager;
     private List<Event> eventList;
     private ActivityMainBinding binding;
     private SharedPreferences sharedPreferences;
-    private NotificationManager notificationManager;
-    public static String CHANNEL_ID = "channel-id";
+    public static final String CHANNEL_ID = "channel-id";
+    private int requestCode = 0;
 
     /* replaces all fragments in the FragmentManager with the given fragment */
     @Override
@@ -244,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
     }
 
     @Override
-    public void scheduleNotification(String content, int delay) {
+    public void scheduleNotification(String content, long delay) {
         scheduleNotification(createNotification(content), delay);
     }
 
@@ -255,19 +252,20 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         int importance = NotificationManager.IMPORTANCE_DEFAULT;
         NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, name, importance);
         notificationChannel.setDescription(description);
-        notificationManager = getSystemService(NotificationManager.class);
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
         notificationManager.createNotificationChannel(notificationChannel);
     }
 
-    private void scheduleNotification(Notification notification, int delay) {
+    private void scheduleNotification(Notification notification, long delay) {
         Intent notificationIntent = new Intent(this, NotificationPublisher.class);
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, requestCode, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        requestCode++;
 
         long futureInMillis = SystemClock.elapsedRealtime() + delay;
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+        alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
     }
 
     /* creates a reminder about the given event at time/date contained in calendar

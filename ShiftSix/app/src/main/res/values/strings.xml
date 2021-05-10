@@ -34,4 +34,5 @@
     <string name="calendar_menu_visibility">Calendar Menu Visibility</string>
     <string name="shopping_list">Shopping List</string>
     <string name="expense_fragment">Expense Fragment</string>
+    <string name="remind_me">Remind me?</string>
 </resources>
