@@ -47,14 +47,14 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(getLayoutInflater());
+
         initRecyclerView();
 
         FloatingActionButton addItemButton = binding.addItemButton;
-
         addItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentChangeListener.stackFragment(new AddEventFragment());
+                fragmentChangeListener.changeFragment(new AddEventFragment());
             }
         });
 
@@ -75,6 +75,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
+    /* prompts a resort and redraw from the recyclerview */
     public void updateRecyclerView() {
         if (recyclerView.getAdapter() != null)
             recyclerView.getAdapter().notifyDataSetChanged();

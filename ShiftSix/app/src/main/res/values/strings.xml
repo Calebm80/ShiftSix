@@ -30,4 +30,8 @@
     <string name="event_name">Event Name</string>
     <string name="delete">delete</string>
     <string name="expenses">expenses</string>
+    <string name="expense_menu_visibility">Expense Menu Visibility</string>
+    <string name="calendar_menu_visibility">Calendar Menu Visibility</string>
+    <string name="shopping_list">Shopping List</string>
+    <string name="expense_fragment">Expense Fragment</string>
 </resources>
