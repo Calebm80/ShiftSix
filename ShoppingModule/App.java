@@ -7,10 +7,6 @@ public class App {
     }
     
     App() {
-<<<<<<< HEAD
         MainMenu mainMenu = new MainMenu();
-=======
-        MainMenu mainMenu = new MainMenu(); // app always starts at main menu this way - maybe change later?
->>>>>>> develop
     }
 }
