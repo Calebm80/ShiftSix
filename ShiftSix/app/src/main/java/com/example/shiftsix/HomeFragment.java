@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
         addItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentChangeListener.stackFragment(new AddEventFragment());
+                fragmentChangeListener.changeFragment(new AddEventFragment());
             }
         });
 

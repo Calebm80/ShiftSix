@@ -224,8 +224,8 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
     }
 
     private void clearEventList() {
-        for (int i = 0; i <= eventList.size(); i++) {
-            removeEvent(eventList.get(i));
-        }
+        eventList.clear();
+        updateRecyclerView();
+        saveEventList();
     }
 }

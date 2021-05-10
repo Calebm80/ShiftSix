@@ -72,7 +72,7 @@ public class AddEventFragment extends Fragment {
         String[] eventTimeSplitAM_PM = eventTimeSplit[1].split(" ");
 
         int year = Integer.parseInt(eventDateSplit[2]);
-        int month = Integer.parseInt(eventDateSplit[0]);
+        int month = Integer.parseInt(eventDateSplit[0])-1;
         int day = Integer.parseInt(eventDateSplit[1]);
         int hourOfDay = Integer.parseInt(eventTimeSplit[0]);
         int minute = Integer.parseInt(eventTimeSplitAM_PM[0]);

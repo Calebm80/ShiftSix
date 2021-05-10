@@ -17,6 +17,12 @@ public class Event implements Comparable<Event>, Serializable {
         this.date = date;
     }
 
+    public Event() {
+        this.name = null;
+        this.description = null;
+        this.date = new GregorianCalendar();
+    }
+
     public String getName() {
         return name;
     }
@@ -31,9 +37,9 @@ public class Event implements Comparable<Event>, Serializable {
 
     public String getDateString() { // example return String: 4/20/2021
         int year = date.get(Calendar.YEAR);
-        int month = date.get(Calendar.MONTH) + 1; // month is stored from 0-11 so adjust +1 for final display
+        int month = date.get(Calendar.MONTH); // month is stored from 0-11 so adjust +1 for final display
         int day_of_month = date.get(Calendar.DAY_OF_MONTH);
-        return String.valueOf(month) + '/' + String.valueOf(day_of_month) + '/' + year;
+        return String.valueOf(month+1) + '/' + String.valueOf(day_of_month) + '/' + year;
     }
 
     public String getTimeString() {
@@ -77,5 +83,36 @@ public class Event implements Comparable<Event>, Serializable {
         if (hour_x != hour_y) return Integer.compare(hour_x, hour_y);
         if (minute_x != minute_y) return Integer.compare(minute_x, minute_y);
         return 0;
+    }
+
+    // returns true if given event is before current event
+    public Boolean before(Event event) {
+        int result = this.compareTo(event);
+        if (result < 0) return true;
+        return false;
+        /*int year_given = event.date.get(Calendar.YEAR);
+        int month_given = event.date.get(Calendar.MONTH);
+        int day_given = event.date.get(Calendar.DATE);
+        int hour_given = event.date.get(Calendar.HOUR_OF_DAY);
+        int minute_given = event.date.get(Calendar.MINUTE);*/
+
+    }
+
+    // returns true if given event is after current event
+    public Boolean after(Event event) {
+        int result = this.compareTo(event);
+        return result > 0;
+    }
+
+    public Boolean sameDay(Event event) {
+        int year_given = event.getDate().get(Calendar.YEAR);
+        int month_given = event.getDate().get(Calendar.MONTH);
+        int day_given = event.getDate().get(Calendar.DATE);
+
+        int year = this.getDate().get(Calendar.YEAR);
+        int month = this.getDate().get(Calendar.MONTH);
+        int day = this.getDate().get(Calendar.DATE);
+
+        return (year == year_given) && (month == month_given) && (day == day_given);
     }
 }
