@@ -240,12 +240,15 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         saveEventList();
     }
 
+    /* schedule a notification with String content - delay should be time in miliseconds from now
+    *  to when the notification will display */
     @Override
     public void scheduleNotification(String content, long delay) {
         scheduleNotification(createNotification(content), delay);
     }
 
-    ///////////////////////////////
+    /* initializes the notification channnel, only needs to be called once in main activity and no
+    *  reference to the channel is needed */
     private void createNotificationChannel() {
         CharSequence name = "ShiftSix-Notifications";
         String description = "Notification channel for the ShiftSix application";
@@ -269,7 +272,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
     }
 
     /* creates a reminder about the given event at time/date contained in calendar
-     *  with body of String text */
+    *  with body of String text */
     public Notification createNotification(String content) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher)
