@@ -1,10 +1,22 @@
 package com.example.shiftsix.containers;
 
+import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.os.Build;
+import android.view.ContextThemeWrapper;
+
+import androidx.core.app.NotificationCompat;
+
 import com.applandeo.materialcalendarview.EventDay;
+import com.example.shiftsix.R;
 
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import static androidx.core.content.ContextCompat.getSystemService;
 
 public class Event implements Comparable<Event>, Serializable {
     private String name;
@@ -41,7 +53,7 @@ public class Event implements Comparable<Event>, Serializable {
         int year = date.get(Calendar.YEAR);
         int month = date.get(Calendar.MONTH); // month is stored from 0-11 so adjust +1 for final display
         int day_of_month = date.get(Calendar.DAY_OF_MONTH);
-        return String.valueOf(month+1) + '/' + String.valueOf(day_of_month) + '/' + year;
+        return String.valueOf(month + 1) + '/' + String.valueOf(day_of_month) + '/' + year;
     }
 
     /* returns time as string -> h:mm AM/PM */

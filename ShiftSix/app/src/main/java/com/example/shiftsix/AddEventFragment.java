@@ -1,11 +1,19 @@
 package com.example.shiftsix;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +24,16 @@ import com.google.android.material.button.MaterialButton;
 
 import java.util.GregorianCalendar;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 
 public class AddEventFragment extends Fragment {
-    IEventListUpdateListener eventListUpdateListener;
-    FragmentAddEventBinding binding;
+    private IEventListUpdateListener eventListUpdateListener;
+    private INotificationScheduleListener notificationScheduleListener;
+    private FragmentAddEventBinding binding;
+
 
     public AddEventFragment() {
-        // required empty constructor
     }
 
     @Override
@@ -33,6 +44,13 @@ public class AddEventFragment extends Fragment {
         } else {
             throw new ClassCastException(context.toString()
                     + " must implement IEventListUpdateListener");
+        }
+
+        if (context instanceof  INotificationScheduleListener) {
+            notificationScheduleListener = (INotificationScheduleListener) context;
+        } else {
+            throw new ClassCastException(context.toString()
+                    + " must implement INotificationScheduleListener");
         }
     }
 
@@ -65,6 +83,8 @@ public class AddEventFragment extends Fragment {
         GregorianCalendar date = parseEventDateTime(eventDate, eventTime);
 
         Event event = new Event(eventName, eventDescription, date);
+
+        notificationScheduleListener.scheduleNotification(eventName + ": " + eventDescription, 5000); // 5 second delay
         eventListUpdateListener.addEvent(event);
     }
 

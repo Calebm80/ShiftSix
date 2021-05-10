@@ -36,6 +36,14 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -44,9 +52,12 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_3a_API_29" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-05-10T02:19:56.396Z" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/java/com/example/shiftsix" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -145,6 +156,14 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="1165" y="563" key="#Notifications" timestamp="1620613106738">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1165" y="563" key="#Notifications/0.0.2560.1400/-1920.0.1920.1040/2560.296.1366.728@0.0.2560.1400" timestamp="1620613106738" />
+    <state x="1085" y="406" key="#com.intellij.ide.util.MemberChooser" timestamp="1620616724008">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1085" y="406" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1400/-1920.0.1920.1040/2560.296.1366.728@0.0.2560.1400" timestamp="1620616724008" />
     <state x="860" y="455" key="AndroidCreateResourceFileDialog" timestamp="1620599120340">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -153,5 +172,25 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1124" y="490" key="AndroidCreateXmlResourceDialog/0.0.2560.1400/-1920.0.1920.1040/2560.296.1366.728@0.0.2560.1400" timestamp="1620599803621" />
+    <state width="2516" height="400" key="GridCell.Tab.0.bottom" timestamp="1620618350592">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2516" height="400" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.0.1920.1040/2560.296.1366.728@0.0.2560.1400" timestamp="1620618350592" />
+    <state width="2516" height="400" key="GridCell.Tab.0.center" timestamp="1620618350592">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2516" height="400" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.0.1920.1040/2560.296.1366.728@0.0.2560.1400" timestamp="1620618350592" />
+    <state width="2516" height="400" key="GridCell.Tab.0.left" timestamp="1620618350591">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2516" height="400" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.0.1920.1040/2560.296.1366.728@0.0.2560.1400" timestamp="1620618350591" />
+    <state width="2516" height="400" key="GridCell.Tab.0.right" timestamp="1620618350592">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2516" height="400" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.0.1920.1040/2560.296.1366.728@0.0.2560.1400" timestamp="1620618350592" />
+    <state x="781" y="345" key="SettingsEditor" timestamp="1620613151612">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="781" y="345" key="SettingsEditor/0.0.2560.1400/-1920.0.1920.1040/2560.296.1366.728@0.0.2560.1400" timestamp="1620613151612" />
   </component>
 </project>
