@@ -43,6 +43,10 @@ public class CalendarFragment extends Fragment {
     }
 
     private void initCalendar() {
+        /* this method is very bad - alternative would be making Event class extend eventDay class.
+        *  That wouldn't work at the moment, since eventDay class is not serializable. Fixing this
+        *  would allow much better handling of events and proper calendar user interaction */
+
         for (Event event : eventList) {
             bufferedEvents.add(new EventDay(event.getDate(), R.drawable.ic_baseline_error_outline_24));
         }

@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
     ActivityMainBinding binding;
     SharedPreferences sharedPreferences;
 
+    /* replaces all fragments in the FragmentManager with the given fragment */
     @Override
     public void changeFragment(Fragment fragment) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -45,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
                 .commit();
     }
 
+    /* Adds a fragment to the FragmentManager without deleting or disabling any current fragments
+    *  In the future this should disable background fragments so that click listeners do not allow
+    *  clicking through windows, until then it is not safe to use */
     @Override
     public void stackFragment(Fragment fragment) {
         fragmentManager.beginTransaction()
@@ -75,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         }
     }
 
+    /* Initializes the bottom navigation view, should be recalled any time bottomNav state is changed
+    *   in order to properly consider activation settings in SharedPreferences */
     private void initBottomNav() {
         BottomNavigationView bottomNav = binding.bottomNav;
 
@@ -147,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         saveEventList();
     }
 
+    /* Sorts eventList and prompts all active recycler views to redraw */
     private void updateRecyclerView() {
         Collections.sort(eventList);
         for (Fragment fragment : fragmentManager.getFragments()) {
@@ -201,6 +208,8 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         initBottomNav();
     }
 
+    /* populates the eventList with slightly random dates in the year 2021, ensuring at least 8 dates
+    *  in each month. Dates may not be unique. All times will be midnight. Prompts a redraw of RecyclerView. */
     private void populateTestList() {
         for (int month = 0; month < 12; month++) {
             for (int i = 0; i < 8; i++) {
@@ -210,22 +219,14 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
                 eventList.add(new Event(name, "test description", calendar));
             }
         }
-        /*for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 12; j++) {
-                for (int k = 1; k < 30; k++) {
-                    String name = "example event " + String.valueOf(i) + String.valueOf(j) + String.valueOf(k);
-                    GregorianCalendar calendar = new GregorianCalendar(i + 2020, j, k);
-                    eventList.add(new Event(name, "test description", calendar));
-                }
-            }
-        }*/
         updateRecyclerView();
         saveEventList();
     }
 
+    /* Clears all events and prompts a redraw of RecyclerView */
     private void clearEventList() {
-        for (int i = 0; i <= eventList.size(); i++) {
-            removeEvent(eventList.get(i));
-        }
+        eventList.clear();
+        updateRecyclerView();
+        saveEventList();
     }
 }

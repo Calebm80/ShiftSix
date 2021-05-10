@@ -55,6 +55,8 @@ public class AddEventFragment extends Fragment {
         });
     }
 
+    /* creates a new event, adds it to the RecyclerView and the eventList,
+    *  prompts RecyclerView to redraw */
     private void createEvent() {
         String eventName = binding.eventName.getText().toString();
         String eventDate = binding.eventDate.getText().toString();
@@ -66,13 +68,17 @@ public class AddEventFragment extends Fragment {
         eventListUpdateListener.addEvent(event);
     }
 
-    private GregorianCalendar parseEventDateTime(String eventDate, String eventTime) { // this whole function is super unsafe needs work for weird values
+    /* this whole function is super unsafe for unusual formats at the moment
+    *  eventDate must be given in format -> d/m/yyyy
+    *  eventTime must be given in format -> h:mm AM/PM
+    *  any other format will cause exceptions that are not handled */
+    private GregorianCalendar parseEventDateTime(String eventDate, String eventTime) {
         String[] eventDateSplit = eventDate.split("/");
         String[] eventTimeSplit = eventTime.split(":");
         String[] eventTimeSplitAM_PM = eventTimeSplit[1].split(" ");
 
         int year = Integer.parseInt(eventDateSplit[2]);
-        int month = Integer.parseInt(eventDateSplit[0]);
+        int month = Integer.parseInt(eventDateSplit[0])-1;
         int day = Integer.parseInt(eventDateSplit[1]);
         int hourOfDay = Integer.parseInt(eventTimeSplit[0]);
         int minute = Integer.parseInt(eventTimeSplitAM_PM[0]);

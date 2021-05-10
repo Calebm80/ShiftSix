@@ -57,6 +57,7 @@ public class SelectedEventFragment extends Fragment {
     private void initFragment() {
         binding.eventName.setText(event.getName());
         binding.eventDate.setText(event.getDateString());
+        binding.eventTime.setText(event.getTimeString());
         binding.eventDescription.setText(event.getDescription());
         //binding.checkboxEventReminder;
     }
