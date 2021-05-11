@@ -6,6 +6,6 @@ Environment setup:
 3) Copy the HTTPS URL from this GitHub page (Code -> HTTPS)
 4) Paste URL into URL field of New Project prompt.
 5) Selected desired Directory for the new project.
-6) Press Clone!
+6) Press Clone.
 
 Emulator setup:
